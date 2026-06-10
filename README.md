@@ -78,12 +78,13 @@ Web Dashboard (live alerts)
 
 - [x] Repository setup
 - [x] Step 1: Environment setup (Python, AWS CLI, Docker)
-- [ ] Step 2: AWS CloudWatch log pipeline
-- [ ] Step 3: Log ingestion script
-- [ ] Step 4: Anomaly detection engine
-- [ ] Step 5: Claude API integration
-- [ ] Step 6: Docker + dashboard
-
+- [ ] Step 2: AWS multi-source log pipeline (CloudTrail + VPC Flow Logs + CloudWatch)
+- [ ] Step 3: Real-time streaming ingestion engine
+- [ ] Step 4: Behavioral baseline engine
+- [ ] Step 5: Attack chain detector
+- [ ] Step 6: Claude AI autonomous SOC analyst
+- [ ] Step 7: Automated response (SOAR)
+- [ ] Step 8: Dashboard + Docker + Kubernetes
 ---
 
 ## About
