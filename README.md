@@ -79,8 +79,8 @@ Web Dashboard (live alerts)
 - [x] Repository setup
 - [x] Step 1: Environment setup (Python, AWS CLI, Docker)
 - [x] Step 2: AWS multi-source log pipeline (CloudTrail + VPC Flow Logs + CloudWatch)
-- [ ] Step 3: Real-time streaming ingestion engine
-- [ ] Step 4: Behavioral baseline engine
+- [x] Step 3: Real-time streaming ingestion engine
+- [x] Step 4: Behavioral baseline engine
 - [ ] Step 5: Attack chain detector
 - [ ] Step 6: Claude AI autonomous SOC analyst
 - [ ] Step 7: Automated response (SOAR)
