@@ -81,7 +81,7 @@ Web Dashboard (live alerts)
 - [x] Step 2: AWS multi-source log pipeline (CloudTrail + VPC Flow Logs + CloudWatch)
 - [x] Step 3: Real-time streaming ingestion engine
 - [x] Step 4: Behavioral baseline engine
-- [ ] Step 5: Attack chain detector
+- [x] Step 5: Attack chain detector
 - [ ] Step 6: Claude AI autonomous SOC analyst
 - [ ] Step 7: Automated response (SOAR)
 - [ ] Step 8: Dashboard + Docker + Kubernetes
