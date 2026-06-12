@@ -84,7 +84,7 @@ Web Dashboard (live alerts)
 - [x] Step 5: Attack chain detector
 - [x] Step 6: Claude AI autonomous SOC analyst
 - [x] Step 7: Automated response (SOAR)
-- [ ] Step 8: Dashboard + Docker + Kubernetes
+- [x] Step 8: Dashboard + Docker + Kubernetes
 ---
 
 ## About
