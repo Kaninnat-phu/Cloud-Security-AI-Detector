@@ -9,7 +9,6 @@
 
 An autonomous cloud security operations system that detects, analyzes, and responds to threats in real time — without human intervention.
 
-Built as a portfolio project by a 3rd-year Network & Security student at Mahidol University (MUICT), targeting a Cloud Security Engineer career path.
 
 ---
 
@@ -217,7 +216,6 @@ Successful: 5/5
 
 Built by **Kaninnat Phunglaor** — 3rd year ICT student at Mahidol University, specialising in Network & Security.
 
-Pursuing ISC2 CC certification. Targeting Cloud Security Engineer roles.
 
 🔗 [LinkedIn](https://www.linkedin.com/in/kaninnat-phunglaor-60b924380/)
 
