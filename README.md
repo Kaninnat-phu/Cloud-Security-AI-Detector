@@ -186,7 +186,6 @@ docker run -p 5001:5001 --env-file .env security-detector
 | Incident response | Structured report with severity scoring |
 | Audit trail | All actions logged with timestamps |
 
-Maps to **ISC2 CC Domain 5 — Security Operations** and **CompTIA Security+ objectives**.
 
 ---
 
