@@ -9,6 +9,9 @@
 
 An autonomous cloud security operations system that detects, analyzes, and responds to threats in real time — without human intervention.
 
+### 🔗 [View the live project walkthrough →](https://kaninnat-phu.github.io/Cloud-Security-AI-Detector/)
+
+![Cloud Security AI Detector](docs/preview.png)
 
 ---
 
@@ -24,7 +27,6 @@ Most organizations generate thousands of AWS log events per day across multiple 
 - **Displays** everything on a live web dashboard
 
 ---
-
 ## 🏗️ Architecture
 
 ```
