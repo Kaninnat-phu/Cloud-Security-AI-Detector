@@ -218,7 +218,7 @@ Successful: 5/5
 Built by **Kaninnat Phunglaor** — 3rd year ICT student at Mahidol University, specialising in Network & Security.
 
 
-🔗 [LinkedIn](https://www.linkedin.com/in/kaninnat-phunglaor-60b924380/)
+🔗 [LinkedIn](https://www.linkedin.com/in/kaninnat-phungla-or/)
 
 ---
 
