@@ -7,7 +7,7 @@
 ![scikit-learn](https://img.shields.io/badge/ML-scikit--learn-yellow)
 ![Status](https://img.shields.io/badge/Status-Complete-green)
 
-An autonomous cloud security operations system that detects, analyzes, and responds to threats in real time — without human intervention.
+An autonomous cloud security operations system that detects, analyzes, and responds to AWS threats in real time — without human intervention.
 
 ### 🔗 [View the live project walkthrough →](https://kaninnat-phu.github.io/Cloud-Security-AI-Detector/)
 
@@ -15,48 +15,44 @@ An autonomous cloud security operations system that detects, analyzes, and respo
 
 ---
 
-## What problem does this solve?
+## Why this matters
 
-Most organizations generate thousands of AWS log events per day across multiple services. A human SOC analyst cannot monitor all of them simultaneously. This system automates the entire detection-to-response pipeline:
+Most organizations generate thousands of AWS log events per day across CloudTrail, VPC Flow Logs, and CloudWatch — far more than a human SOC analyst can monitor in real time. This system closes that gap end-to-end: it ingests logs from three AWS sources simultaneously, learns what "normal" looks like using machine learning, recognizes multi-step attack chains (brute force, data exfiltration, defense evasion, credential compromise), explains each threat in plain English with an AI SOC analyst mapped to MITRE ATT&CK, and automatically contains confirmed threats — blocking IPs, locking down compromised accounts, and raising alarms — all visible on a live dashboard.
 
-- **Ingests** logs from 3 AWS sources simultaneously in real time
-- **Learns** what normal behavior looks like using ML
-- **Detects** multi-step attack patterns across log sources
-- **Explains** threats in plain English using Claude AI
-- **Responds** automatically by blocking IPs and locking down compromised accounts
-- **Displays** everything on a live web dashboard
+In short: it's a working SIEM + SOAR pipeline built from scratch, not a wrapper around an existing tool.
 
 ---
+
+## Results
+
+- **3 AWS log sources** ingested concurrently in real time via async streaming
+- **4 multi-stage attack chains** detected end-to-end across log sources (brute force takeover, data exfiltration, defense evasion, credential compromise)
+- **Behavioral baseline** trained with Isolation Forest to flag anomalies without hand-written rules
+- **Sub-second to low-second** detection-to-alert latency in local testing
+- **5/5 automated response actions** executed successfully per incident (IP block, IAM lockdown, CloudWatch alarm, audit log, dashboard update)
+- **Full MITRE ATT&CK mapping** (e.g. T1110, T1078, T1548) attached to every generated incident report
+
+---
+
 ## Architecture
 
-```
-AWS CloudTrail ──────────────┐
-AWS VPC Flow Logs ───────────┼──→ Real-time Streaming Engine
-AWS CloudWatch ──────────────┘         (Python asyncio)
-                                            │
-                              ┌─────────────┼─────────────┐
-                              ▼             ▼             ▼
-                    Behavioral         Attack Chain    Log Storage
-                    Baseline Engine    Detector        (JSONL)
-                    (Isolation Forest) (4 chain types)
-                              │             │
-                              └──────┬──────┘
-                                     ▼
-                            Claude AI SOC Analyst
-                            (Incident Reports +
-                             MITRE ATT&CK Mapping)
-                                     │
-                              ┌──────┴──────┐
-                              ▼             ▼
-                     Automated          Live Web
-                     Responder          Dashboard
-                     (SOAR layer)       (Flask)
-                              │
-                    ┌─────────┼─────────┐
-                    ▼         ▼         ▼
-                Block IP  Disable   Create CW
-                          User      Alarm
-```
+![Architecture Diagram](docs/architecture.png)
+
+**Flow:** Log Data Sources (CloudTrail, VPC Flow Logs, CloudWatch, S3) → Data Ingestion (async engine, real-time pull) → Detection & Analysis Core (Isolation Forest baseline → Multi-stage Attack Chain Detector → Claude SOC Analyst with MITRE ATT&CK mapping) → Response & Output (SOAR automated responder + Flask dashboard). Response actions feed back into the log sources, closing the loop.
+
+---
+
+## Skills Demonstrated
+
+| Area | What's shown here |
+|---|---|
+| Cloud security engineering | Multi-source AWS log pipeline (CloudTrail, VPC Flow Logs, CloudWatch, S3) in a real AWS region |
+| Anomaly detection / ML | Isolation Forest behavioral baseline trained on historical event patterns |
+| SOC analyst workflows | Multi-stage attack chain correlation across log sources, severity scoring |
+| Threat intelligence | MITRE ATT&CK technique mapping generated per incident |
+| Incident response automation (SOAR) | Automated IP blocking, IAM lockdown, CloudWatch alarms, audit logging |
+| AI integration | Claude API used as an SOC analyst to generate plain-English incident reports |
+| Software engineering | Async Python (boto3/asyncio), Flask dashboard, Dockerized deployment |
 
 ---
 
@@ -74,65 +70,6 @@ AWS CloudWatch ──────────────┘         (Python asy
 | Auto response | AWS Lambda, boto3 | Automated threat containment |
 | Dashboard | Python Flask, HTML/CSS | Live monitoring interface |
 | Containerization | Docker | Portable deployment |
-
----
-
-## Detection Capabilities
-
-### Behavioral Baseline Engine
-- Trains on historical events to learn normal patterns
-- Detects deviations: unusual hours, new IPs, error spikes, high-risk APIs
-- Uses Isolation Forest ML algorithm — same approach as enterprise tools like Darktrace
-
-### Attack Chain Detector
-Recognizes multi-step attacks across all 3 log sources:
-
-| Attack Type | Steps Detected |
-|---|---|
-| **Brute Force Takeover** | Failed logins → Successful access → Privilege escalation |
-| **Data Exfiltration** | Reconnaissance → Data access → High outbound traffic |
-| **Defense Evasion** | Disable logging → Delete evidence |
-| **Credential Compromise** | New access key created → Immediately used |
-
-### AI Incident Reports
-Each detected threat generates a professional report including:
-- Executive summary (non-technical)
-- Technical attack narrative
-- MITRE ATT&CK technique mapping (T1110, T1078, T1548, etc.)
-- Affected resources
-- Prioritized response actions
-
----
-
-## Automated Response (SOAR)
-
-When severity exceeds threshold (default: 7/10):
-
-1. **Block attacker IP** — removes from security group ingress rules
-2. **Lock down compromised user** — applies emergency deny-all IAM policy
-3. **Create CloudWatch alarm** — monitors for repeat attempts
-4. **Log incident** — writes full audit trail to CloudWatch
-
-All actions logged with timestamps for compliance and forensics.
-
----
-
-## Project Structure
-
-```
-cloud-security-ai-detector/
-├── src/
-│   ├── ingestion.py      # Real-time streaming from 3 AWS sources
-│   ├── baseline.py       # ML behavioral baseline + anomaly scoring
-│   ├── attack_chain.py   # Multi-step attack pattern detection
-│   ├── ai_analyst.py     # Claude AI incident report generation
-│   ├── responder.py      # Automated SOAR response engine
-│   └── dashboard.py      # Flask web dashboard
-├── logs/                 # Event storage (gitignored)
-├── .env.example          # Environment variables template
-├── Dockerfile            # Container configuration
-└── README.md
-```
 
 ---
 
@@ -175,19 +112,43 @@ docker run -p 5001:5001 --env-file .env security-detector
 
 ---
 
-## Security Concepts Demonstrated
+## Detection Capabilities
 
-| Concept | Implementation |
+### Behavioral Baseline Engine
+- Trains on historical events to learn normal patterns
+- Detects deviations: unusual hours, new IPs, error spikes, high-risk APIs
+- Uses Isolation Forest ML algorithm — the same general approach used by enterprise tools like Darktrace
+
+### Attack Chain Detector
+Recognizes multi-step attacks across all 3 log sources:
+
+| Attack Type | Steps Detected |
 |---|---|
-| Log aggregation | 3 simultaneous AWS log sources |
-| SIEM | Unified event correlation across sources |
-| Behavioral analytics | Isolation Forest ML baseline |
-| Threat intelligence | MITRE ATT&CK framework mapping |
-| SOAR | Automated response to confirmed threats |
-| Defense in depth | Multi-layer detection (rules + ML + AI) |
-| Incident response | Structured report with severity scoring |
-| Audit trail | All actions logged with timestamps |
+| **Brute Force Takeover** | Failed logins → Successful access → Privilege escalation |
+| **Data Exfiltration** | Reconnaissance → Data access → High outbound traffic |
+| **Defense Evasion** | Disable logging → Delete evidence |
+| **Credential Compromise** | New access key created → Immediately used |
 
+### AI Incident Reports
+Each detected threat generates a professional report including:
+- Executive summary (non-technical)
+- Technical attack narrative
+- MITRE ATT&CK technique mapping (T1110, T1078, T1548, etc.)
+- Affected resources
+- Prioritized response actions
+
+---
+
+## Automated Response (SOAR)
+
+When severity exceeds threshold (default: 7/10):
+
+1. **Block attacker IP** — removes from security group ingress rules
+2. **Lock down compromised user** — applies emergency deny-all IAM policy
+3. **Create CloudWatch alarm** — monitors for repeat attempts
+4. **Log incident** — writes full audit trail to CloudWatch
+
+All actions logged with timestamps for compliance and forensics.
 
 ---
 
@@ -213,12 +174,46 @@ Successful: 5/5
 
 ---
 
+## Security Concepts Demonstrated
+
+| Concept | Implementation |
+|---|---|
+| Log aggregation | 3 simultaneous AWS log sources |
+| SIEM | Unified event correlation across sources |
+| Behavioral analytics | Isolation Forest ML baseline |
+| Threat intelligence | MITRE ATT&CK framework mapping |
+| SOAR | Automated response to confirmed threats |
+| Defense in depth | Multi-layer detection (rules + ML + AI) |
+| Incident response | Structured report with severity scoring |
+| Audit trail | All actions logged with timestamps |
+
+---
+
+## Project Structure
+
+```
+cloud-security-ai-detector/
+├── src/
+│   ├── ingestion.py      # Real-time streaming from 3 AWS sources
+│   ├── baseline.py       # ML behavioral baseline + anomaly scoring
+│   ├── attack_chain.py   # Multi-step attack pattern detection
+│   ├── ai_analyst.py     # Claude AI incident report generation
+│   ├── responder.py      # Automated SOAR response engine
+│   └── dashboard.py      # Flask web dashboard
+├── logs/                 # Event storage (gitignored)
+├── docs/                 # Architecture diagram, preview image
+├── .env.example          # Environment variables template
+├── Dockerfile            # Container configuration
+└── README.md
+```
+
+---
+
 ## About
 
 Built by **Kaninnat Phunglaor** — 3rd year ICT student at Mahidol University, specialising in Network & Security.
 
-
-🔗 [LinkedIn](https://www.linkedin.com/in/kaninnat-phungla-or/)
+🔗 [LinkedIn](https://www.linkedin.com/in/kaninnat-phungla-or/) · [GitHub](https://github.com/Kaninnat-phu)
 
 ---
 
