@@ -1,4 +1,4 @@
-# 🛡️ Cloud Security AI Detector
+# Cloud Security AI Detector
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
 ![AWS](https://img.shields.io/badge/AWS-CloudWatch-orange)
@@ -15,7 +15,7 @@ An autonomous cloud security operations system that detects, analyzes, and respo
 
 ---
 
-## 🎯 What problem does this solve?
+## What problem does this solve?
 
 Most organizations generate thousands of AWS log events per day across multiple services. A human SOC analyst cannot monitor all of them simultaneously. This system automates the entire detection-to-response pipeline:
 
@@ -27,7 +27,7 @@ Most organizations generate thousands of AWS log events per day across multiple 
 - **Displays** everything on a live web dashboard
 
 ---
-## 🏗️ Architecture
+## Architecture
 
 ```
 AWS CloudTrail ──────────────┐
@@ -60,7 +60,7 @@ AWS CloudWatch ──────────────┘         (Python asy
 
 ---
 
-## ⚙️ Tech Stack
+## Tech Stack
 
 | Layer | Technology | Purpose |
 |---|---|---|
@@ -77,7 +77,7 @@ AWS CloudWatch ──────────────┘         (Python asy
 
 ---
 
-## 🔍 Detection Capabilities
+## Detection Capabilities
 
 ### Behavioral Baseline Engine
 - Trains on historical events to learn normal patterns
@@ -104,7 +104,7 @@ Each detected threat generates a professional report including:
 
 ---
 
-## ⚡ Automated Response (SOAR)
+## Automated Response (SOAR)
 
 When severity exceeds threshold (default: 7/10):
 
@@ -117,7 +117,7 @@ All actions logged with timestamps for compliance and forensics.
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 cloud-security-ai-detector/
@@ -136,7 +136,7 @@ cloud-security-ai-detector/
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Python 3.11+
@@ -175,7 +175,7 @@ docker run -p 5001:5001 --env-file .env security-detector
 
 ---
 
-## 🔬 Security Concepts Demonstrated
+## Security Concepts Demonstrated
 
 | Concept | Implementation |
 |---|---|
@@ -191,7 +191,7 @@ docker run -p 5001:5001 --env-file .env security-detector
 
 ---
 
-## 📊 Sample Output
+## Sample Output
 
 **Attack chain detected:**
 ```
@@ -213,7 +213,7 @@ Successful: 5/5
 
 ---
 
-## 👤 About
+## About
 
 Built by **Kaninnat Phunglaor** — 3rd year ICT student at Mahidol University, specialising in Network & Security.
 
