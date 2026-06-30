@@ -36,7 +36,7 @@ In short: it's a working SIEM + SOAR pipeline built from scratch, not a wrapper 
 
 ## Architecture
  
-<img width="2816" height="1536" alt="Diagram" src="https://github.com/user-attachments/assets/e6888c6a-798f-4c67-be60-e9b7454f83b2" />
+![Cloud Security AI Detector](docs/Architecture_diagram.png)
 
 
 **Flow:** Log Data Sources (CloudTrail, VPC Flow Logs, CloudWatch) → Data Ingestion (async engine, real-time pull) → Detection & Analysis Core (Isolation Forest baseline → Multi-stage Attack Chain Detector → Claude SOC Analyst with MITRE ATT&CK mapping) → Response & Output (SOAR automated responder + Flask dashboard). Response actions feed back into the log sources, closing the loop.
