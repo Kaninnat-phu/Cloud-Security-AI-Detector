@@ -212,7 +212,7 @@ cloud-security-ai-detector/
 
 ## About
 
-Built by **Kaninnat Phunglaor** — 3rd year ICT student at Mahidol University, specialising in Network & Security.
+Built by **Kaninnat Phungla-or** — 3rd year ICT student at Mahidol University, specialising in Network & Security.
 
 🔗 [LinkedIn](https://www.linkedin.com/in/kaninnat-phungla-or/) · [GitHub](https://github.com/Kaninnat-phu)
 
